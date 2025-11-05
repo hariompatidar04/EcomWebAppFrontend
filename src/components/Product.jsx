@@ -3,15 +3,19 @@ import ProductCard from "./ProductCard";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../action";
+import Filter from "./Filter";
 
 
 
 const Product=()=>{
 
-    // const isLoading=false;
-    const [isLoading, setIsLoading] = useState(true);
-    const errorMessage="";
-    const { products }=useSelector((state)=>state.products);
+    
+    const { isLoading,errorMessage }=useSelector(
+        (state)=>state.errors        
+    );
+
+    const {products}=useSelector((state)=>state.products);
+
     const dispatch=useDispatch();
 
     useEffect(()=>{
@@ -74,17 +78,12 @@ const Product=()=>{
 
 
 // Simulate loading state
-useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
 
     return (
-        <div className="lg:px-14 sm:px-8 py-14 2xl:w-[90%] 2xl:mx-auto">
+        
+        <div className="lg:px-14 sm:px-8 2xl:w-[90%] 2xl:mx-auto my-14">
+            <Filter/>
             {isLoading ?
             (<p className="text-center max-h-full">it is loading...</p>)
             : errorMessage ?
@@ -94,11 +93,14 @@ useEffect(() => {
             </div>)
             :(
               // product carts grid
-                <div className="min-h-[700px] lg:grid-cols-4 2xl:grid-cols-6  sm:grid-cols-2 grid gap-6">
-                {products.map((item,index)=>(
-                    <ProductCard key={index} {...item}/>
+               <>
+               <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 py-10">
+                {products?.map((item, i) => (
+                    <ProductCard key={i} {...item} />
                 ))}
                 </div>
+               </>
+
             )
     }           
         </div>

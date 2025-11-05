@@ -26,7 +26,7 @@ const ProductCard=({
 
 
     return (
-        <div className="product-card border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
+        <div className="product-card  border rounded-2xl shadow-2xl overflow-hidden transition-shadow duration-300">
             {/* product image */}
             <div onClick={()=>{
                 handleProductView({ id:productId,
@@ -39,8 +39,8 @@ const ProductCard=({
                                     specialPrice
                                 })
                 }} 
-                className="w-full overflow-hidden aspect-3/2">
-                <img src={image} alt={productName} className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105"/>
+                className="w-full overflow-hidden ">
+                <img src={"https://placehold.co/600x400"} alt={productName} className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105"/>
             </div>
 
             {/* Product Name */}
@@ -56,13 +56,13 @@ const ProductCard=({
                                     specialPrice
                                 })
                 }}
-                className="text-lh font-semibold mb-2 cursor-pointer">{productName}</h2>
-                <div className="min-h-20 max-h-20">
-                    <p className="text-gray-600 text-sm">{description} </p>
+                className="text-lh font-semibold mb-1 cursor-pointer">{productName}</h2>
+                <div className="min-h-12 max-h-12">
+                    <p className="text-gray-600 text-sm line-clamp-2">{description} </p>
                 </div>
 
                 {/* product Price */}
-                <div className="flex  items-center justify-between ">
+                <div className="flex justify-between flex-col ">
                     {specialPrice ? (
                     <div className="flex flex-col">
                     <span className="text-gray-400 line-through text-sm">
@@ -81,15 +81,15 @@ const ProductCard=({
             }
 
             {/* product Add to Cart/Sold Out button */}
-                <button  
-                disabled={!isAvailable ||btnLoader}
-                onClick={()=>{}} className={`bg-blue-500 text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center 
-            ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"}`}>
-                <FaShoppingCart className="mr-2"/>
-                    {isAvailable ?
-                        "Add to Cart"
-                        :"Stock Out"
-                    }
+                  <button  
+                                disabled={!isAvailable|btnLoader}
+                                onClick={()=>{}} className={`bg-blue-500 text-white p-1 lg:mx-1 mt-1 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center  
+                            ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"}`}>
+                                <FaShoppingCart className="mr-2"/>
+                                    {isAvailable ?
+                                        "Add to Cart"
+                                        :"Stock Out"
+                                    }
                 </button>
 
             </div>

@@ -13,6 +13,7 @@ import Status from "./Status";
 export default function ProductViewModel({ open, setOpen, product, isAvailable }) {
   if (!product) return null;
 
+  //product destructuring
   const {
     productId,
     productName,
@@ -25,6 +26,8 @@ export default function ProductViewModel({ open, setOpen, product, isAvailable }
   } = product;
 
   return (
+
+    // use an modal view templet 
     <Dialog
       open={open}
       onClose={() => setOpen(false)}
@@ -114,6 +117,8 @@ export default function ProductViewModel({ open, setOpen, product, isAvailable }
               <p className="mt-3 text-sm leading-6 text-slate-600">
                 {description}
               </p>
+
+              
 
               {/* Close Button */}
              
