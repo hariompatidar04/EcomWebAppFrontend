@@ -10,16 +10,7 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 
-const Filter = () => {
-
-   const categories = [
-    { categoryId: 1, categoryName: "Electronics" },
-    { categoryId: 2, categoryName: "Clothing" },
-    { categoryId: 3, categoryName: "Furniture" },
-    { categoryId: 4, categoryName: "Books" },
-    { categoryId: 5, categoryName: "Toys" },
-  ];
-
+const Filter = ({ categories }) => {
 
   // --- HOOKS ---
   const [searchParams] = useSearchParams();
@@ -43,7 +34,6 @@ const Filter = () => {
     setCategory(currentCategory);
     setSortOrder(currentSortOrder);
     setSearchTerm(currentSearchTerm);
-
   }, [searchParams]);
 
   // --- HANDLERS ---
@@ -51,8 +41,7 @@ const Filter = () => {
     const selectedCategory = event.target.value;
     if (selectedCategory === "all") {
       params.delete("category");
-    } 
-    else {
+    } else {
       params.set("category", selectedCategory);
     }
     navigate(`${pathname}?${params.toString()}`);
@@ -71,8 +60,7 @@ const Filter = () => {
 
       if (searchTerm) {
         params.set("keyword", searchTerm);
-      } 
-      else {
+      } else {
         params.delete("keyword");
       }
       navigate(`${pathname}?${params.toString()}`);
@@ -84,10 +72,8 @@ const Filter = () => {
   }, [searchTerm, searchParams, navigate, pathname]); // Note: searchTerm is the main trigger
 
   const handleClearFilter = () => {
-    navigate({pathname:window.location.pathname});
+    navigate({ pathname: window.location.pathname });
   };
-
- 
 
   // //it allow to update query param
   // const [searchParams] = useSearchParams();
@@ -160,7 +146,7 @@ const Filter = () => {
       <div className="relative flex items-center 2xl:w-[450px] sm:w-[420px] w-full">
         <input
           value={searchTerm}
-          onChange={(e)=>setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
           type="text"
           placeholder="Search Products"
           className="border border-gray-400 text-slate-800 rounded-md py-2 pl-10 pr-4 w-full focus:outline-hidden focus:ring-2 focus:ring-[#1976d2]"
@@ -212,8 +198,10 @@ const Filter = () => {
           </Button>
         </Tooltip>
 
-        <button className="flex items-center gap-2 bg-rose-900 text-white px-3 py-2 rounded-sm transition duration-300 ease-in shadow-md focus:outline-none"
-        onClick={handleClearFilter} >
+        <button
+          className="flex items-center gap-2 bg-rose-900 text-white px-3 py-2 rounded-sm transition duration-300 ease-in shadow-md focus:outline-none"
+          onClick={handleClearFilter}
+        >
           <FiRefreshCw size={16} className="font-bold" />
           <span className="font-bold">Clear Filter</span>
         </button>
